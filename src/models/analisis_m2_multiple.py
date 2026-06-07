@@ -51,3 +51,5 @@ ax[1].grid(True)
 plt.show()
 
 "El $72.7\%$ de la variabilidad de los goles de este grupo sigue estando fuertemente explicada por solo dos variables: la cantidad de tiros al arco (SoT) y la calidad de los mismos (xG). Ambos coeficientes resultaron altamente significativos con p-valores de $0.000$."
+"La normalidad no se cumple estrictamente. Puede considerarse una aproximación aceptable en la parte central de la distribución, pero existen desviaciones claras en las colas."
+"Y el supuesto de homocedasticidad no parece cumplirse, el supuesto de homocedasticidad no parece cumplirse."
