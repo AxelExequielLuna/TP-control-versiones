@@ -17,10 +17,16 @@ indices = random.sample(range(n), n_train)
 datos_test = datos.drop(indices)
 datos_train = datos.iloc[indices]
 
-modelos = {"Modelo 1: solo SoT": ["SoT"], "Modelo 2: solo xG": ["xG"], "Modelo 3: SoT + xG": ["SoT", "xG"]}
+modelos = {"Modelo 1: solo xG": ["xG"],
+           "Modelo 2: solo SoT": ["SoT"],
+           "Modelo 3: solo SCA": ["SCA"],
+           "Modelo 4: xG + SCA": ["xG", "SCA"],
+           "Modelo 5: xG + SoT": ["xG", "SoT"],
+           "Modelo 6: xG + SoT + Min": ["xG", "SoT", "Min"],}
 
 y_train = datos_train["anoto"]
 y_test = datos_test["anoto"]
+resultados = []
 
 for nombre_modelo, variables in modelos.items():
 
@@ -92,3 +98,15 @@ for nombre_modelo, variables in modelos.items():
     #plt.title("Curva ROC")
     #plt.legend()
     #plt.show()
+
+    resultados.append({
+        "Variables": ", ".join(variables),
+        "Punto corte": round(p_optimo, 2),
+        "Sensibilidad": sensibilidad,
+        "Especificidad": especificidad,
+        "Error": error,
+        "AUC": auc
+    })
+
+tabla_resultados = pd.DataFrame(resultados)
+print("\n",tabla_resultados.round(4))
