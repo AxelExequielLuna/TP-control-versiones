@@ -10,8 +10,27 @@ sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 from carga_datos import CargaDatos
 
+"""
+Modelo:
+
+Variable respuesta:
+- Gls: cantidad de goles convertidos por cada jugador.
+
+Variables predictoras:
+- SoT: cantidad de tiros al arco.
+- xG: cantidad de goles esperados.
+- Min: cantidad de minutos jugados.
+- Sh/90: cantidad de tiros al arco cada 90 minutos.
+- MP: Minutos Jugados
+"""
 datos = CargaDatos("data/jugadores_2024_2025.csv").cargar_datos()
 
+variables_multiple = ["SoT", "xG", "Min", "Sh/90", "MP"]
+X_multiple = sm.add_constant(datos[variables_multiple])
+
+modelo_multiple = sm.OLS(y, X_multiple).fit()
+print(modelo_multiple.summary())
+print(modelo_multiple.r2squared)
 """
 Modelo 1:
 
